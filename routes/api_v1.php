@@ -1,13 +1,10 @@
 <?php
 
 use App\Http\Controllers\Api\V1\TicketController;
-use App\Http\Controllers\AuthController;
-use App\Models\Ticket;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\UsersController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:sanctum')->apiResource('tickets', TicketController::class);
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->group(function () {
+    Route::apiResource('users', UsersController::class);
+    Route::apiResource('tickets', TicketController::class);
+});
